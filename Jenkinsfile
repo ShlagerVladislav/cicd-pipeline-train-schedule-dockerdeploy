@@ -43,14 +43,14 @@ pipeline {
                 milestone(1)
                 withCredentials ([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
-                        sh "\"docker pull vladislav3195/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "\"docker pull vladislav3195/train-schedule\""
                         try {
                            sh "\"docker stop train-schedule\""
                            sh "\"docker rm train-schedule\""
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "\"docker run --restart always --name train-schedule -p 8080:8080 -d vladislav3195/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "\"docker run --restart always --name train-schedule -p 8080:8080 -d vladislav3195/train-schedule\""
                     }
                 }
             }
